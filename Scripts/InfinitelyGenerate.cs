@@ -62,9 +62,9 @@ public class InfinitelyGenerate : MonoBehaviour
     public void TileSpawnArea(int index) 
     {
         float savePosition = ySpawnVertical; //Save y-coordinate
-        for (int i = 0; i < 10; i++) //Number of column
+        for (int i = 0; i < 2; i++) //Number of column
         {
-            for (int j = 0; j < 10; j++)//Number of row
+            for (int j = 0; j < 2; j++)//Number of row
             {
                 Instantiate(tilePrefabs[index], transform.up * ySpawnVertical + Vector3.forward * ySpawnVertical * 2 + Vector3.right * rowSpace, transform.rotation);
                 ySpawnVertical += tileHeight;

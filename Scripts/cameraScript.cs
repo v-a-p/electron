@@ -18,7 +18,7 @@ public class cameraScript : MonoBehaviour
     public Vector3 shakePos;
     public Vector3 orginPos;
     public AnimationCurve shakeCurve;
-    private float currentTime;  //when want to shake, must be zero
+    private float currentTime;  
 
 
     public void Shake()

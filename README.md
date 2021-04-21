@@ -7,9 +7,9 @@ The preset of the game and the main character's reasoning are that they, as a tr
 
 ## Contact
 
-Inquiries and suggestions at: electrongameproduct@gmail.com
-Product owner: andrejsp@kth.se
-Team scrum master: vaprodan@kth.se
+Inquiries and suggestions at: electrongameproduct@gmail.com  
+Product owner: andrejsp@kth.se  
+Team scrum master: vaprodan@kth.se  
 
 ### Markdown
 

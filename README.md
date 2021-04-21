@@ -1,8 +1,15 @@
-## Welcome to GitHub Pages
+## Welcome to team Electron's game documentation
 
-You can use the [editor on GitHub](https://github.com/v-a-p/electron/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
+We are working on a 2D survival game with resource gathering, combat, infinitely generated tile map with diverse biomes and a simple iniciating storyline.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+The preset of the game and the main character's reasoning are that they, as a travaller, got shipwrecked on a new strange land, where they encounter creatures/inhabitants they'd never seen before. Are they the hero or the villain? Sometimes there's reason to believe in the gray area that is the human nature.
+
+
+## Contact
+
+Inquiries and suggestions at: electrongameproduct@gmail.com
+Product owner: andrejsp@kth.se
+Team scrum master: vaprodan@kth.se
 
 ### Markdown
 

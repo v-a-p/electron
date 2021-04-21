@@ -13,6 +13,7 @@ public class InfinitelyGenerate : MonoBehaviour
     void Start()
     {
         cornerDetectTimer = cornerDetectTime; //Set timer
+
         //for (int i = 0; i < 5; i++)
         //{
         //TileSpawnHorizontal(0);
@@ -35,7 +36,16 @@ public class InfinitelyGenerate : MonoBehaviour
             else
             {
                 Debug.Log("No Tile");
-                TileSpawnArea(1);
+
+                int rand = 0; //Randomly generate an integer between 0 and 9
+
+                //Corner 10%, Red 20%, Rock 40%, Water 30%
+                if (rand == 0) TileSpawnArea(4);
+                else if (rand == 1 || rand == 2) TileSpawnArea(1);
+                else if (rand > 2 && rand < 7) TileSpawnArea(2);
+                else if (rand > 6 && rand < 10) TileSpawnArea(3);
+
+
             }
             cornerDetectTimer = cornerDetectTime; //Reset timer
         }
@@ -88,8 +98,6 @@ public class InfinitelyGenerate : MonoBehaviour
     {
         Tilemap tilemap = GameObject.FindGameObjectWithTag("Tilemap").GetComponent<Tilemap>(); //Create an instance of object that has "Tilemap" tag
         PlayerMovement player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>(); //Create an instance of object that has "Player" tag
-
-        Debug.Log("Corner corrdinates relative to player: " + player.CornerX + " / " + player.CornerY);
 
         Vector2 position = new Vector2(player.CornerX, player.CornerY); //Get coordinates of top right corner
         Vector3 positionConvert = position; //Implicitly convert Vector2 to Vector3

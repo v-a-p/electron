@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rigidbodyComponent = GetComponent<Rigidbody2D>();
         currentHP = 8;
-        UIManager.instance.UpdateHP(currentHP, maxHP);
+        //UIManager.instance.UpdateHP(currentHP, maxHP);
     }
 
     // Update is called once per frame
@@ -66,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
         {
             currentHP = Mathf.Clamp(currentHP + amount, 0, maxHP);
         }
-        UIManager.instance.UpdateHP(currentHP, maxHP);
+        //UIManager.instance.UpdateHP(currentHP, maxHP);
         Debug.Log(currentHP + "/" + maxHP);
     }
 

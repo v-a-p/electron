@@ -37,10 +37,10 @@ public class InfinitelyGenerate : MonoBehaviour
             {
                 Debug.Log("No Tile");
 
-                int rand = 0; //Randomly generate an integer between 0 and 9
+                int rand = Random.Range(0, 9); //Randomly generate an integer between 0 and 9
 
                 //Corner 10%, Red 20%, Rock 40%, Water 30%
-                if (rand == 0) TileSpawnArea(4);
+                if (rand == 0) TileSpawnArea(0);
                 else if (rand == 1 || rand == 2) TileSpawnArea(1);
                 else if (rand > 2 && rand < 7) TileSpawnArea(2);
                 else if (rand > 6 && rand < 10) TileSpawnArea(3);
@@ -96,13 +96,16 @@ public class InfinitelyGenerate : MonoBehaviour
     //== Check if corner has tile, if not, generate ==========================================
     public bool CheckIfTileExist()
     {
-        Tilemap tilemap = GameObject.FindGameObjectWithTag("Tilemap").GetComponent<Tilemap>(); //Create an instance of object that has "Tilemap" tag
         PlayerMovement player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>(); //Create an instance of object that has "Player" tag
 
+        float laserLength = 0.000001f;
         Vector2 position = new Vector2(player.CornerX, player.CornerY); //Get coordinates of top right corner
-        Vector3 positionConvert = position; //Implicitly convert Vector2 to Vector3
-        Vector3Int positionConvertInt = Vector3Int.FloorToInt(positionConvert); //Convert Vector3 to Vector3Int by taking the floor value.
-        bool existTile = tilemap.HasTile(positionConvertInt); //Check if there is tile in the position of the top right corner
+        RaycastHit2D hasObject = Physics2D.Raycast(position, Vector2.right, laserLength);
+
+        bool existTile;
+        if (hasObject.collider == null) existTile = false;
+        else existTile = true;
+
         return existTile;
     }
 }

@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float speed = 5f;
     Rigidbody2D rigidbodyComponent;
-   
+
     public int maxHP = 10;
     public int currentHP;
 
@@ -15,9 +15,6 @@ public class PlayerMovement : MonoBehaviour
     private float stopDamageTimer;
 
     private Vector2 lookDirection = new Vector2(1, 0); //Default direction is right
-
-    private static float playerX;
-    private static float playerY;
 
     // Start is called before the first frame update
     void Start()
@@ -36,15 +33,14 @@ public class PlayerMovement : MonoBehaviour
         Vector2 position = rigidbodyComponent.position;
         position.x += horizontalMovement * speed * Time.deltaTime;
         position.y += verticalMovement * speed * Time.deltaTime;
-        playerX = position.x;
-        playerY = position.y;
+
         rigidbodyComponent.MovePosition(position);
 
         //===== Invincible period after taking damage =========================
         if (stopDamage)
         {
             stopDamageTimer -= Time.deltaTime;
-            if(stopDamageTimer < 0)
+            if (stopDamageTimer < 0)
             {
                 stopDamage = false;
             }
@@ -59,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void ChangeHP(int amount)
     {
-        if(amount < 0)
+        if (amount < 0)
         {
             if (stopDamage) return;
             currentHP = Mathf.Clamp(currentHP + amount, 0, maxHP);
@@ -74,18 +70,7 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log(currentHP + "/" + maxHP);
     }
 
-    //==== Return player position ==================================================
-    public float PlayerX
-    {
-        get { return playerX; }
-    }
-
-    public float PlayerY
-    {
-        get{ return playerY; }
-    }
-
-    //==== Return corner position ==================================================
+    //==== Return corner position (not relative to player) ==================================================
     [SerializeField] private Transform corner;
 
     public float CornerX

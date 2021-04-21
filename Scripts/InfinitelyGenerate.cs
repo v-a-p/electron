@@ -6,10 +6,13 @@ using UnityEngine.Tilemaps;
 public class InfinitelyGenerate : MonoBehaviour
 {
     public GameObject[] tilePrefabs; //An array that stores objects/maps that should be generated in procudual generation
+    private float cornerDetectTime = 3f; //Detect corner every x second
+    private float cornerDetectTimer;
 
     // Start is called before the first frame update
     void Start()
     {
+        cornerDetectTimer = cornerDetectTime; //Set timer
         //for (int i = 0; i < 5; i++)
         //{
         //TileSpawnHorizontal(0);
@@ -22,13 +25,19 @@ public class InfinitelyGenerate : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        if (CheckIfTileExist()) //Check if there is tile on the top right corner, and print out information in console
+        cornerDetectTimer -= Time.deltaTime;
+        if (cornerDetectTimer < 0) //If time to detect corner
         {
-            Debug.Log("Found Tile");
-        }
-        else
-        {
-            TileSpawnArea(1);
+            if (CheckIfTileExist()) //Check if there is tile on the top right corner, and print out information in console
+            {
+                Debug.Log("Found Tile");
+            }
+            else
+            {
+                Debug.Log("No Tile");
+                TileSpawnArea(1);
+            }
+            cornerDetectTimer = cornerDetectTime; //Reset timer
         }
     }
 
@@ -80,7 +89,9 @@ public class InfinitelyGenerate : MonoBehaviour
         Tilemap tilemap = GameObject.FindGameObjectWithTag("Tilemap").GetComponent<Tilemap>(); //Create an instance of object that has "Tilemap" tag
         PlayerMovement player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>(); //Create an instance of object that has "Player" tag
 
-        Vector2 position = new Vector2(player.PlayerX + player.CornerX, player.PlayerY + player.CornerY); //Get coordinates of top right corner
+        Debug.Log("Corner corrdinates relative to player: " + player.CornerX + " / " + player.CornerY);
+
+        Vector2 position = new Vector2(player.CornerX, player.CornerY); //Get coordinates of top right corner
         Vector3 positionConvert = position; //Implicitly convert Vector2 to Vector3
         Vector3Int positionConvertInt = Vector3Int.FloorToInt(positionConvert); //Convert Vector3 to Vector3Int by taking the floor value.
         bool existTile = tilemap.HasTile(positionConvertInt); //Check if there is tile in the position of the top right corner

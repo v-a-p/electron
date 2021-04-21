@@ -27,7 +27,7 @@ public class InfinitelyGenerate : MonoBehaviour
     private void FixedUpdate()
     {
         cornerDetectTimer -= Time.deltaTime;
-        if (cornerDetectTimer < 0) //If time to detect corner
+        if(cornerDetectTimer < 0) //If time to detect corner
         {
             if (CheckIfTileExist()) //Check if there is tile on the top right corner, and print out information in console
             {
@@ -78,7 +78,7 @@ public class InfinitelyGenerate : MonoBehaviour
     public float rowSpace; //x-coordinate of the row
     public float rowSpaceAdjust; //Space between two rows
 
-    public void TileSpawnArea(int index)
+    public void TileSpawnArea(int index) 
     {
         float savePosition = ySpawnVertical; //Save y-coordinate
         for (int i = 0; i < 2; i++) //Number of column

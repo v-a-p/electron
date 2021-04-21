@@ -24,6 +24,7 @@ public class Collectibles : MonoBehaviour
         {
             player.ChangeHP(1); //HP + 1
             Destroy(this.gameObject); //Destory the collectible
+            Debug.Log("Collectible is found");
         }
     }
 }

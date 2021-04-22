@@ -77,16 +77,54 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log(currentHP + "/" + maxHP);
     }
 
-    //==== Return corner position (not relative to player) ==================================================
-    [SerializeField] private Transform corner;
+    //==== Return empty detector position (not relative to player) Down Left ==================================================
+    [SerializeField] private Transform downLeft;
 
-    public float CornerX
+    public float downLeftX
     {
-        get { return corner.position.x; }
+        get { return downLeft.position.x; }
     }
 
-    public float CornerY
+    public float downLeftY
     {
-        get { return corner.position.y; }
+        get { return downLeft.position.y; }
+    }
+
+    //==== Return empty detector position (not relative to player) Down Right ==================================================
+    [SerializeField] private Transform downRight;
+
+    public float downRightX
+    {
+        get { return downRight.position.x; }
+    }
+
+    public float downRightY
+    {
+        get { return downRight.position.y; }
+    }
+    //==== Return empty detector position (not relative to player) Top Left ==================================================
+    [SerializeField] private Transform topLeft;
+
+    public float topLeftX
+    {
+        get { return topLeft.position.x; }
+    }
+
+    public float topLeftY
+    {
+        get { return topLeft.position.y; }
+    }
+
+    //==== Return empty detector position (not relative to player) Top Right ==================================================
+    [SerializeField] private Transform topRight;
+
+    public float topRightX
+    {
+        get { return topRight.position.x; }
+    }
+
+    public float topRightY
+    {
+        get { return topRight.position.y; }
     }
 }

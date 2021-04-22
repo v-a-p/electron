@@ -1,1 +1,1 @@
-Here is where the artwork will be stores (sprites, textures)
+Here is where the artwork will be stored (sprites, textures)

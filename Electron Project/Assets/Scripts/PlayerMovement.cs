@@ -58,6 +58,18 @@ public class PlayerMovement : MonoBehaviour
                 arrowShoot.ArrowMovement(lookDirection, 200);
             }
         }
+
+        //==== Press down Z key to intereact with NPC =================================
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            RaycastHit2D npcDetect = Physics2D.Raycast(rigidbodyComponent.position, lookDirection, 2f, LayerMask.GetMask("NPC"));
+            if (npcDetect.collider != null)
+            {
+                Debug.Log("NPC exist");
+                NPCManager npc = npcDetect.collider.GetComponent<NPCManager>();
+                if (npc != null) npc.ShowDialog();
+            }
+        }
     }
 
     public void ChangeHP(int amount)

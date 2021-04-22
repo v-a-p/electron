@@ -20,6 +20,7 @@ public class InfinitelyGenerate : MonoBehaviour
 
     //== Vertical ================================================================
     public float tileHeight; //Height of the tile, or distance between two objects
+    public float tileHeight_down;
 
     public float ySpawnVertical_up; //Spawn position (top is positive)
     public float ySpawnVertical_down;
@@ -34,14 +35,14 @@ public class InfinitelyGenerate : MonoBehaviour
         xSpawnHorizontal_right += tileWidth;
         xSpawnHorizontal_left -= tileWidth;
         ySpawnVertical_up += tileHeight;
-        ySpawnVertical_down -= tileHeight;
+        ySpawnVertical_down += tileHeight;
     }
 
     // Update is called once per frame
     private void FixedUpdate()
     {
         cornerDetectTimer -= Time.deltaTime;
-        if(cornerDetectTimer < 0) //If time to detect corner
+        if (cornerDetectTimer < 0) //If time to detect corner
         {
             if (CheckIfTileExist() == 1)
             {
@@ -109,7 +110,7 @@ public class InfinitelyGenerate : MonoBehaviour
     public void TileSpawnVertical_Down(int index)
     {
         Instantiate(tilePrefabs[index], transform.up * -ySpawnVertical_down + Vector3.forward * ySpawnVertical_up * 2, transform.rotation); //Clone object
-        ySpawnVertical_down += tileHeight; //Set the position of next clone (y-axis)
+        ySpawnVertical_down += tileHeight_down; //Set the position of next clone (y-axis)
     }
 
 
@@ -118,7 +119,7 @@ public class InfinitelyGenerate : MonoBehaviour
     public float rowSpace; //x-coordinate of the row
     public float rowSpaceAdjust; //Space between two rows
 
-    public void TileSpawnArea(int index) 
+    public void TileSpawnArea(int index)
     {
         float savePosition = ySpawnVertical_up; //Save y-coordinate
         for (int i = 0; i < 2; i++) //Number of column

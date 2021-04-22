@@ -721,14 +721,15 @@ MonoBehaviour:
   - {fileID: 3609256616186477641, guid: ee4752edbdea4d54fbd9bb211447adbb, type: 3}
   - {fileID: 3609256616186477641, guid: ee4752edbdea4d54fbd9bb211447adbb, type: 3}
   - {fileID: 3609256616186477641, guid: ee4752edbdea4d54fbd9bb211447adbb, type: 3}
-  tileWidth: 10.5
+  tileWidth: 4
   xSpawnHorizontal_right: 0
-  ySpawnHorizontal_right: 0
+  ySpawnHorizontal_right: -2.8
   xSpawnHorizontal_left: 0
-  ySpawnHorizontal_left: 3.53
+  ySpawnHorizontal_left: 0.8
   tileHeight: 13.75
-  ySpawnVertical_up: 0
-  ySpawnVertical_down: 0
+  tileHeight_down: 0
+  ySpawnVertical_up: 2
+  ySpawnVertical_down: -10
   rowSpace: 0
   rowSpaceAdjust: 18
 --- !u!4 &1215960584

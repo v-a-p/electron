@@ -96,7 +96,7 @@ public class InfinitelyGenerate : MonoBehaviour
 
     public void TileSpawnHorizontal_Left(int index)
     {
-        Instantiate(tilePrefabs[index], transform.position * xSpawnHorizontal_left + Vector3.forward * xSpawnHorizontal_left * 2 + Vector3.up * ySpawnHorizontal_left, transform.rotation); //Clone object
+        Instantiate(tilePrefabs[index], transform.position * xSpawnHorizontal_left + Vector3.forward * xSpawnHorizontal_left * 10 + Vector3.up * ySpawnHorizontal_left, transform.rotation); //Clone object
         xSpawnHorizontal_left -= tileWidth; //Set the position of next clone (x-axis)
         ySpawnHorizontal_left += adjustSpace * tileWidth; //Adjust 3D axis to 2D axis
     }

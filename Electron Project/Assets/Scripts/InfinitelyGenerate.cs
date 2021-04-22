@@ -27,26 +27,42 @@ public class InfinitelyGenerate : MonoBehaviour
     private void FixedUpdate()
     {
         cornerDetectTimer -= Time.deltaTime;
-        if(cornerDetectTimer < 0) //If time to detect corner
+        if (cornerDetectTimer < 0) //If time to detect corner
         {
-            if (CheckIfTileExist()) //Check if there is tile on the top right corner, and print out information in console
+            if (CheckIfTileExist() == 1)
             {
-                Debug.Log("Found Tile");
+                Debug.Log("Left");
             }
-            else
+            else if (CheckIfTileExist() == 2)
             {
-                Debug.Log("No Tile");
-
-                int rand = Random.Range(0, 9); //Randomly generate an integer between 0 and 9
-
-                //Corner 10%, Red 20%, Rock 40%, Water 30%
-                if (rand == 0) TileSpawnArea(0);
-                else if (rand == 1 || rand == 2) TileSpawnArea(1);
-                else if (rand > 2 && rand < 7) TileSpawnArea(2);
-                else if (rand > 6 && rand < 10) TileSpawnArea(3);
-
-
+                Debug.Log("Right");
             }
+            else if (CheckIfTileExist() == 3)
+            {
+                Debug.Log("Top");
+            }
+            else if (CheckIfTileExist() == 4)
+            {
+                Debug.Log("Bottom");
+            }
+            else if (CheckIfTileExist() == 5)
+            {
+                Debug.Log("Bottom left");
+            }
+            else if (CheckIfTileExist() == 6)
+            {
+                Debug.Log("Bottom right");
+            }
+            else if (CheckIfTileExist() == 7)
+            {
+                Debug.Log("Top left");
+            }
+            else if (CheckIfTileExist() == 8)
+            {
+                Debug.Log("Top right");
+            }
+            else Debug.Log("Found tile");
+
             cornerDetectTimer = cornerDetectTime; //Reset timer
         }
     }
@@ -78,7 +94,7 @@ public class InfinitelyGenerate : MonoBehaviour
     public float rowSpace; //x-coordinate of the row
     public float rowSpaceAdjust; //Space between two rows
 
-    public void TileSpawnArea(int index) 
+    public void TileSpawnArea(int index)
     {
         float savePosition = ySpawnVertical; //Save y-coordinate
         for (int i = 0; i < 2; i++) //Number of column
@@ -94,18 +110,36 @@ public class InfinitelyGenerate : MonoBehaviour
     }
 
     //== Check if corner has tile, if not, generate ==========================================
-    public bool CheckIfTileExist()
+    public int CheckIfTileExist()
     {
         PlayerMovement player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>(); //Create an instance of object that has "Player" tag
 
-        float laserLength = 0.000001f;
-        Vector2 position = new Vector2(player.CornerX, player.CornerY); //Get coordinates of top right corner
-        RaycastHit2D hasObject = Physics2D.Raycast(position, Vector2.right, laserLength);
+        float laserLength = 10f;
 
-        bool existTile;
-        if (hasObject.collider == null) existTile = false;
-        else existTile = true;
+        //== Bottom left =========================================================================================================
+        Vector2 positionBL = new Vector2(player.downLeftX, player.downLeftY); //Get coordinates of bottom left corner
+        RaycastHit2D hasObject_downLeft = Physics2D.Raycast(positionBL, Vector2.down, laserLength);
 
-        return existTile;
+        //== Bottom right =========================================================================================================
+        Vector2 positionBR = new Vector2(player.downRightX, player.downRightY); //Get coordinates of bottom right corner
+        RaycastHit2D hasObject_downRight = Physics2D.Raycast(positionBR, Vector2.down, laserLength);
+
+        //== Top left =========================================================================================================
+        Vector2 positionTL = new Vector2(player.topLeftX, player.topLeftY); //Get coordinates of top left corner
+        RaycastHit2D hasObject_topLeft = Physics2D.Raycast(positionTL, Vector2.up, laserLength);
+
+        //== Top right =========================================================================================================
+        Vector2 positionTR = new Vector2(player.topRightX, player.topRightY); //Get coordinates of top right corner
+        RaycastHit2D hasObject_topRight = Physics2D.Raycast(positionTR, Vector2.up, laserLength);
+
+        if (hasObject_downLeft.collider == null && hasObject_topLeft.collider == null && hasObject_downRight.collider != null && hasObject_topRight.collider != null) return 1; //Left
+        else if (hasObject_downLeft.collider != null && hasObject_topLeft.collider != null && hasObject_downRight.collider == null && hasObject_topRight.collider == null) return 2; //Right
+        else if (hasObject_downLeft.collider != null && hasObject_topLeft.collider == null && hasObject_downRight.collider != null && hasObject_topRight.collider == null) return 3; //Up
+        else if (hasObject_downLeft.collider == null && hasObject_topLeft.collider != null && hasObject_downRight.collider == null && hasObject_topRight.collider != null) return 4; //Down
+        else if (hasObject_downLeft.collider == null && hasObject_topLeft.collider == null && hasObject_downRight.collider == null && hasObject_topRight.collider != null) return 5; //Bottom left
+        else if (hasObject_downLeft.collider == null && hasObject_topLeft.collider != null && hasObject_downRight.collider == null && hasObject_topRight.collider == null) return 6; //Bottom right
+        else if (hasObject_downLeft.collider == null && hasObject_topLeft.collider == null && hasObject_downRight.collider != null && hasObject_topRight.collider == null) return 7; //Top left
+        else if (hasObject_downLeft.collider != null && hasObject_topLeft.collider == null && hasObject_downRight.collider == null && hasObject_topRight.collider == null) return 8; //Top right
+        else return -1;
     }
 }

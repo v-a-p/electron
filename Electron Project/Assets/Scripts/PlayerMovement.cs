@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector2 lookDirection = new Vector2(1, 0); //Default direction is right
 
+    public GameObject arrowPrefab; //Arrow (weapon)
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,10 +48,15 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        //==== Interacting with NPC (Key Z) ====================================
-        if (Input.GetKeyDown(KeyCode.Z))
+        //==== Shooting arrow (Key space) ====================================
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-
+            GameObject arrow = Instantiate(arrowPrefab, rigidbodyComponent.position, Quaternion.identity);
+            ArrowShooting arrowShoot = arrow.GetComponent<ArrowShooting>();
+            if (arrowShoot != null)
+            {
+                arrowShoot.ArrowMovement(lookDirection, 200);
+            }
         }
     }
 
